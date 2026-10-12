@@ -1,0 +1,269 @@
+
+:root {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #1e293b;
+  background: #f4f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.topbar {
+  height: 76px;
+  padding: 0 8%;
+  background: #ffffff;
+  border-bottom: 1px solid #e5eaf2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #163b75;
+  font-size: 23px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: #ffffff;
+  background: #2459a9;
+  border-radius: 10px;
+}
+
+.portal-label,
+.eyebrow {
+  color: #56708f;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.page {
+  min-height: 100vh;
+}
+
+.welcome {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 42px 24px 28px;
+}
+
+.eyebrow {
+  color: #2860ad;
+}
+
+.welcome h1 {
+  margin: 12px 0;
+  color: #17345f;
+  font-size: clamp(28px, 4vw, 38px);
+  letter-spacing: -1px;
+}
+
+.welcome > p:last-child {
+  max-width: 650px;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.form-card {
+  max-width: 952px;
+  margin: 0 auto 36px;
+  padding: 32px;
+  background: #ffffff;
+  border: 1px solid #e3eaf3;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgb(31 55 90 / 5%);
+}
+
+.form-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #e8edf4;
+}
+
+.form-heading h2 {
+  margin: 0 0 8px;
+  color: #203b62;
+  font-size: 21px;
+}
+
+.form-heading p,
+.form-footer p {
+  margin: 0;
+  color: #718096;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.step-label {
+  flex-shrink: 0;
+  padding: 8px 11px;
+  color: #2459a9;
+  background: #edf4ff;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 23px 22px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  color: #334968;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 12px;
+  color: #24364e;
+  background: #ffffff;
+  border: 1px solid #d4deea;
+  border-radius: 7px;
+  outline: none;
+}
+
+.field input::placeholder {
+  color: #9aa8b9;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #3978ce;
+  box-shadow: 0 0 0 3px rgb(57 120 206 / 12%);
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid #e8edf4;
+}
+
+.form-footer button {
+  min-height: 46px;
+  padding: 0 20px;
+  color: #ffffff;
+  background: #2459a9;
+  border: 0;
+  border-radius: 7px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.form-footer button:hover {
+  background: #194783;
+}
+
+.form-footer button:focus-visible {
+  outline: 3px solid #8cbaff;
+  outline-offset: 3px;
+}
+
+.success-message {
+  margin-bottom: 24px;
+  padding: 16px;
+  color: #17603b;
+  background: #edfaf2;
+  border: 1px solid #bce8cb;
+  border-radius: 8px;
+}
+
+.success-message p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer {
+  padding: 20px;
+  color: #8491a3;
+  text-align: center;
+  font-size: 12px;
+}
+
+@media (max-width: 650px) {
+  .topbar {
+    height: 66px;
+    padding: 0 20px;
+  }
+
+  .brand {
+    font-size: 20px;
+  }
+
+  .welcome {
+    padding: 30px 20px 20px;
+  }
+
+  .form-card {
+    margin: 0 12px 24px;
+    padding: 22px 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .form-heading,
+  .form-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .form-footer button {
+    width: 100%;
+  }
+}
