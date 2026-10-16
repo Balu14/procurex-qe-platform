@@ -1,3 +1,4 @@
+import { pool } from './db.js';
 import { z } from 'zod';
 import express from 'express';
 import cors from 'cors';
@@ -25,6 +26,22 @@ const PORT = Number(process.env.PORT) || 3000;
 app.use(cors());
 app.use(express.json());
 
+app.get('/health/db', async (_req, res) => {
+  try {
+    await pool.query('SELECT 1');
+    res.status(200).json({
+      status: 'OK',
+      message: 'ProcureX database connection is healthy',
+    });
+  } catch (error) {
+    console.error('Database connection check failed:', error);
+    res.status(503).json({
+      status: 'ERROR',
+      message: 'Database connection failed',
+    });
+  }
+});
+
 app.get('/health', (_req, res) => {
   res.status(200).json({
     status: 'OK',
@@ -33,7 +50,8 @@ app.get('/health', (_req, res) => {
 });
 
 
-app.post('/api/suppliers', (req, res) => {
+
+app.post('/api/suppliers', async (req, res) => {
   const result = supplierSchema.safeParse(req.body);
 
   if (!result.success) {
@@ -46,10 +64,47 @@ app.post('/api/suppliers', (req, res) => {
     });
   }
 
-  return res.status(201).json({
-    message: 'Supplier registration validated successfully',
-    supplier: result.data,
-  });
+  const supplier = result.data;
+
+  try {
+    const dbResult = await pool.query(
+      `INSERT INTO suppliers (
+        company_name,
+        supplier_type,
+        tax_classification,
+        tax_id,
+        contact_email,
+        contact_phone,
+        street_address,
+        city,
+        country
+      )
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      RETURNING id, company_name, contact_email, created_at`,
+      [
+        supplier.companyName,
+        supplier.supplierType,
+        supplier.taxClassification,
+        supplier.taxId,
+        supplier.contactEmail,
+        supplier.contactPhone,
+        supplier.streetAddress,
+        supplier.city,
+        supplier.country,
+      ],
+    );
+
+    return res.status(201).json({
+      message: 'Supplier registered successfully',
+      supplier: dbResult.rows[0],
+    });
+  } catch (error) {
+    console.error('Supplier registration failed:', error);
+
+    return res.status(500).json({
+      message: 'Unable to register supplier at this time',
+    });
+  }
 });
 
 app.listen(PORT, () => {

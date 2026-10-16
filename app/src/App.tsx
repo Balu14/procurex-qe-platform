@@ -104,10 +104,9 @@ function App() {
 
         {submitted && (
           <div className="success-message" role="status">
-            <strong>Supplier registration validated successfully!</strong>
+            <strong>Supplier registered successfully!</strong>
             <p>
-              The ProcureX API accepted your supplier information.
-              Database saving will be added in a later step.
+              Your supplier registration has been saved successfully.
             </p>
           </div>
         )}
